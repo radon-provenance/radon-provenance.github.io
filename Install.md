@@ -15,6 +15,9 @@ Create the persistent folder to store the database and the logs for Cassandra
 mkdir -p ./cassandra/lib
 mkdir -p ./cassandra/log
 
+chown `id -u`:docker ./cassandra/lib
+chown `id -u`:docker ./cassandra/log
+
 Use the absolute path to Docker
 
 
@@ -37,6 +40,8 @@ Get Opscenter IP address
 
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' opscenter
 -> 172.17.0.2
+
+(Or docker exec opscenter hostname -i)
 
 go to http://172.17.0.2:8888
 
@@ -116,7 +121,7 @@ docker build -t radon-web-image -f radon-web/Dockerfile .
 
 ## Create and run radon-web container
 
-docker run --rm --name radon-web \
+docker run --name radon-web \
            -p 8000:8000 \
            -v $(pwd)/radon-lib:/code/radon-lib\
            -v $(pwd)/radon-web:/code/radon-web\
@@ -124,6 +129,7 @@ docker run --rm --name radon-web \
 
 -> Get ip address
 docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' radon-web
+docker exec radon-web hostname -i
 
 -> http://172.17.0.6:8000
 
