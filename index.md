@@ -1,5 +1,5 @@
-Indigo
-======
+Radon
+=====
 
 * [Presentation](presentation)
 * [Architecture](architecture/index)
