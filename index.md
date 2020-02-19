@@ -1,5 +1,5 @@
-Radon
-=====
+Documentation
+=============
 
 * [Presentation](presentation)
 * [Architecture](architecture/index)

@@ -1,0 +1,28 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+
+header { padding-top: 35px; }
+
+.inner {
+    width: 70%;
+    margin: 0 auto;
+}
+
+table.table_api {
+    margin: 20px;
+}
+
+table.table_api th {
+    font-weight: bold;
+    background: #aaf;
+    color: #000;
+    border: 1px solid #005;
+}
+
+table.table_api td {
+    border: 1px solid #005;
+    background: #e7e7ff;
+}
