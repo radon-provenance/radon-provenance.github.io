@@ -16,7 +16,15 @@ This command has to be executed once to set up the keyspace and the tables in
 Cassandra.
 
 ```
-$ radmin create
+$ radmin init
+```
+
+### Drop the database
+
+This command drops the keyspace and all the tables in Cassandra.
+
+```
+$ radmin drop
 ```
 
 ### Create a user
@@ -32,7 +40,7 @@ $ radmin mkldapuser <username>
 ```
 
 **_Note: An LDAP user doesn't have a password in Radon, the username should be 
-the same than the ldap username. When an LDAP user try to log on  Radon, it 
+the same than the ldap username. When an LDAP user try to log on Radon, it 
 first fails as it doesn't exists in the Radon database but its username/password
 is then checked on LDAP server._**
 
@@ -53,7 +61,7 @@ $ radmin lu <username>
 ### Modify a user
 
 ```
-$ radmin moduser <username> (email | administrator | active | password) [<value>]
+$ radmin moduser <username> (email | administrator | active | password | ldap) [<value>]
 ```
 
 For instance to change the email of the user user10
@@ -105,3 +113,68 @@ $ radmin rfg <groupname> <userlist> ...
 ```
 $ radmin rmgroup <groupname>
 ```
+
+### List the content of a collection
+
+```
+$ radmin ls [<path>] [-a] [--v=<VERSION>]
+```
+
+* The '-a' option also shows the ACL associated to the collection
+
+* The '-v' option specify a version for the collection
+
+### Change the current working dir
+
+```
+$ radmin cd [<path>]
+```
+
+### Create a collection
+
+```
+$ radmin mkdir <path>
+```
+
+### Download a copy of a resource on the local filesystem
+
+```
+$ radmin get <src> [<dest>] [--force]
+```
+
+* If the dest is not specified the resource name is used
+
+* The '--force' option can be used to replace an existing local file 
+
+### Put a local file to Radon
+
+```
+$ radmin put <src> [<dest>] [--mimetype=<MIME>]
+```
+
+* If the dest is not specified the local filename is used
+
+* The '--mimetype' option can be used to specify the mimetype of the data object
+
+### Create a reference in Radon
+
+```
+$ radmin put --ref <url> <dest> [--mimetype=<MIME>]
+```
+
+* The '--mimetype' option can be used to specify the mimetype of the data object
+
+### Display the current working dir
+
+```
+$ radmin pwd
+```
+
+### Remove a collection or a resource
+
+```
+$ radmin rm <path>
+```
+
+
+

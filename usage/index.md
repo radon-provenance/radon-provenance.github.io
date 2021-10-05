@@ -5,5 +5,5 @@ How to interact with a Radon cluster
 * [Radon Command Line Interface](radon-cli)
 * [CDMI RESTful API](cdmi_rest)
 * [Admin RESTful API](admin_rest)
-* [Find RESTful API](find_rest)
-* [Listener](listener)
+* [Find RESTful API (Deprecated)](find_rest)
+* [Listener (Deprecated)](listener)
