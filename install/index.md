@@ -11,7 +11,7 @@ Enterprise (DSE)
 It is installed with its docker image
 
 ```
-docker run -e DS_LICENSE=accept -p 8888:8888 --name opscenter -d datastax/dse-opscenter
+docker run -e DS_LICENSE=accept -p 8888:8888 --name opscenter -d datastax/dse-opscenter:6.8.15
 ```
 
 With the port forwarding that has been defined at the creation ot the image it
@@ -53,7 +53,7 @@ docker run -e DS_LICENSE=accept \
            --name dse -d \
            -v /dse/cassandra/lib:/var/lib/cassandra \
            -v /dse/cassandra/log:/var/log/cassandra \
-           datastax/dse-server:6.7.2 -g
+           datastax/dse-server:6.7.7 -k -s -g
 ```
 
 **_Note 1: On certain configuration (LXC on ProxMox), the size of the heap for the
@@ -165,18 +165,18 @@ docker run -it --rm radon-admin-image:latest /bin/bash
 - Create the database
 
 ```
--> radmin create
-```
-
-- Create an admin user
-
-```
--> radmin mkuser
+-> radmin init
 ```
 
 **_Note 1: Other things can be created at this time like other users, groups, 
 ... But these are the mandatory options that has to be created before the 
 radon-web server can be created._**
+
+- Create other users (optional)
+
+```
+-> radmin mkuser
+```
 
 **_Note 2: The radon-admin image is deleted when we exit its shell but it can be
 recreated at any moment if needed. The radmin commands are also installed in the
@@ -200,8 +200,6 @@ as it requires access to both radon-lib and radon-web packages._**
 ```
 docker run --name radon-web \
            -p 8000:8000 \
-           -v $(pwd)/radon-lib:/code/radon-lib\
-           -v $(pwd)/radon-web:/code/radon-web\
            -d radon-web-image:latest gunicorn project.wsgi:application --bind 0.0.0.0:8000 
 ```
 
