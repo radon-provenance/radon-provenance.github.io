@@ -1,4 +1,10 @@
 
+# Prerequisites
+
+## Install Docker
+
+```sudo apt install docker.io```
+
 
 # Install DSE environment
 
@@ -11,12 +17,12 @@ Enterprise (DSE)
 It is installed with its docker image
 
 ```
-docker run -e DS_LICENSE=accept -p 8888:8888 --name opscenter -d datastax/dse-opscenter:6.8.15
+docker run -e DS_LICENSE=accept -p 8888:8888 --name opscenter -d datastax/dse-opscenter:6.8.16
 ```
 
 With the port forwarding that has been defined at the creation ot the image it
-can be accessed on [http://radon-2.apps.l:8888](http://radon-2.apps.l:8888) (
-where radon-2.apps.l is the hostname of the host).
+can be accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888) (
+where radon-1.apps.l is the hostname of the host, the IP address can also be used).
 
 
 ## DSE Server (Cassandra)
@@ -39,7 +45,7 @@ sudo chmod g+w /dse/cassandra/lib
 sudo chmod g+w /dse/cassandra/log
 ```
 
-**_Note: DSE is run with a specific user with a uid of 999 in the docker image. We 
+**_Note: DSE runs with a specific user with a uid of 999 in the docker image. We 
 need to use the same uid on the host system to allow the DSE server to write files on
 the mounted volumes._**
 
@@ -53,7 +59,7 @@ docker run -e DS_LICENSE=accept \
            --name dse -d \
            -v /dse/cassandra/lib:/var/lib/cassandra \
            -v /dse/cassandra/log:/var/log/cassandra \
-           datastax/dse-server:6.7.7 -k -s -g
+           datastax/dse-server:6.8.16 -k -s -g
 ```
 
 **_Note 1: On certain configuration (LXC on ProxMox), the size of the heap for the
@@ -64,7 +70,7 @@ DSE server shutting down without any error message in the logs._**
 environment to improve performance._**
 
 
-## Studio
+## Studio (Optional)
 
 DataStax Studio is an interactive tool for CQL (Cassandra Query Language) and 
 DSE Graph. It is not mandatory but it can be useful to experiment with graphs.
@@ -77,13 +83,13 @@ docker run -e DS_LICENSE=accept -p 9091:9091 --link dse --name studio -d datasta
 
 
 With the port forwarding that has been defined at the creation ot the image it
-can be accessed on [http://radon-2.apps.l:9091](http://radon-2.apps.l:9091) (
-where radon-2.apps.l is the hostname of the host).
+can be accessed on [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091) (
+where radon-1.apps.l is the hostname of the host).
 
 ## Configure cluster
 
 The cluster have to be configured with the opscenter web application. It can be 
-accessed on [http://radon-2.apps.l:8888](http://radon-2.apps.l:8888).
+accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888).
 
 - Click on Manage existing cluster
 
@@ -146,7 +152,7 @@ If they are defined in the Dockerfile they have the priority
 ## Create radon-admin docker image
 
 ```
-docker build -t radon-admin-image -f radon-lib/Dockerfile .
+docker build -t radon-admin-image --build-arg DSE_HOST --build-arg MQTT_HOST  -f radon-lib/Dockerfile .
 ```
 
 **_Note: The image has to be created from a higher level (./src) than radon-lib to be 
@@ -188,7 +194,7 @@ radon-web image_**
 - Create docker image
 
 ```
-docker build -t radon-web-image -f radon-web/Dockerfile .
+docker build -t radon-web-image --build-arg DSE_HOST --build-arg MQTT_HOST  -f radon-web/Dockerfile .
 ```
 
 **_Note: The image has to be created from a higher level (./src) than radon-web
@@ -203,7 +209,7 @@ docker run --name radon-web \
            -d radon-web-image:latest gunicorn project.wsgi:application --bind 0.0.0.0:8000 
 ```
 
-- Radon web server can be accessed on [http://radon-2.apps.l:8000](http://radon-2.apps.l:8000).
+- Radon web server can be accessed on [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000).
 
 - If needed, we can login to the docker container with the command 
 `docker exec -it radon-web bash`
