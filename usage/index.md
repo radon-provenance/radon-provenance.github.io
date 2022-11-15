@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 How to interact with a Radon cluster
 =====================================
 

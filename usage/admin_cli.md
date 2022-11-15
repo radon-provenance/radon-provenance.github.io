@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Admin Command Line Interface
 
 

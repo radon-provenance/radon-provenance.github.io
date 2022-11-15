@@ -1,3 +1,8 @@
+---
+layout: default
+---
+
+
 Architecture
 ============
 
@@ -17,7 +22,7 @@ themselves, where CRUD is an acronym for Create, Update, Read and Delete.
 
 This schema shows the different components of the system
 
-![Architecture](img/architecture.png)
+![Architecture](assets/images/architecture.png)
 
 The next sections will present each components more precisely.
 
@@ -73,9 +78,9 @@ directly.
 
 ### Graph
 
-Radon is configured to enable the graph store of the Cassandra database we are
+Radon can be configured to enable the graph store of the Cassandra database we are
 using (DataStax Enterprise). This can be used to create alternate views on the
-metadata.
+data or the metadata.
 
 ### Metadata Catalog
 
@@ -92,22 +97,19 @@ When *create*, *update*, or *delete* operations are performed on either a
 nomenclature), a *user* or a *group*, a message is sent to a MQTT broker. This
 message contains information about the operation and resource.
 
-An additional row is also written in a Cassandra table for audit purpose.
+An additional row is also written in a dedicated Cassandra table for audit 
+purpose.
 
 Radon is using the Eclipse Mosquitto message broker, run as a docker container.
 
 ### Workflow Engine
 
 The workflow engine is a daemon that listens to the MQTT. It executes user 
-scripts written in Python when events occur on the Radon Management System.
+scripts when events occur on the Radon Management System.
 
-When a user-defined script is triggered, it is passed the topic as a command
-line argument, and metadata about the object is given in JSON format through
-`stdin`. The script is executed in a Docker container running
-Python 3.4.3, the script is executed as the user `nobody`.
-
-As the script is run in command line, we can imagine using scripts in any kind 
-of languages.
+Current workflow engine is implemented with the Drools Rule Engine. Each event
+appearing in the MQTT queue is transformed as a fact in Drools database,
+then a set of rules can be triggered accordingly.
 
 
 ## Data Layer

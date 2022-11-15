@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Admin RESTful API
 
 * auto-gen TOC:

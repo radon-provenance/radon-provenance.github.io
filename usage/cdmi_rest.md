@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # CDMI RESTful API
 
 * auto-gen TOC:
