@@ -1,73 +1,75 @@
 <!doctype html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-{% seo %}
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
-    <script src="https://code.jquery.com/jquery-3.3.0.min.js" integrity="sha256-RTQy8VOmNlT6b2PIRur37p6JEBZUE7o8wPgMvu18MC4=" crossorigin="anonymous"></script>
-    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
-    <!--[if lt IE 9]>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
-    <![endif]-->
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    {% include head-custom.html %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
+    <title>{{ page.title | default: site.title }}</title>
   </head>
   <body>
-
-      <header>
-        <h1>{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+	
+    <!-- ======================= HEADER ======================= --> 
+    <header class="header">
+      <div class="header__container">
+        <h1>{{ page.title | default: site.title }}</h1>
         <p>{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
-      </header>
-
+      </div>
       <div id="banner">
-        <span id="logo"></span>
-
-        <a href="https://github.com/radon-provenance" class="button fork"><strong>View On GitHub</strong></a>
-      </div><!-- end banner -->
-
-    <div class="wrapper">
-      <nav>
-        <ul>
-           <li class="tag-h1">Overview</li>
-           <li class="tag-h2"><a href='/'>Presentation</a></li>
-           <li class="tag-h2"><a href='/architecture'>Architecture</a></li>
-        </ul>
+        <a href="https://github.com/radon-provenance" class="button"><strong>View On GitHub</strong></a>
+      </div>
+    </header>    
       
-        <ul>
-           <li class="tag-h1">Getting Started</li>
-           <li class="tag-h2"><a href='/download'>Download</a></li>           
-           <li class="tag-h2"><a href='/install'>Install</a></li>
-           <li class="tag-h2"><a href='/running'>Running</a></li>
-        </ul>
-        <ul> 
-           <li class="tag-h1">System Overview</li>
-           <li class="tag-h2"><a href='/components/radon_lib'>Radon Library</a></li>
-           <li class="tag-h2"><a href='/components/radon_web'>Radon Web</a></li>
-           <li class="tag-h2"><a href='/components/radon_cli'>Radon CLI</a></li>
-           <li class="tag-h2"><a href='/components/radon_listener'>Radon Listener</a></li>
-           <li class="tag-h2"><a href='/components/radon_search'>Radon Search</a></li>
-         </ul>
-        <ul> 
-           <li class="tag-h1">Usage</li>
-           <li class="tag-h2"><a href='/usage/admin_cli'>Admin CLI</a></li>
-           <li class="tag-h2"><a href='/usage/admin_rest'>Admin REST API</a></li>
-           <li class="tag-h2"><a href='/usage/cdmi_rest'>CDMI REST API</a></li>
-           <!-- <li class="tag-h2"><a href='/usage/search'>Search</a></li> -->
-           <!-- <li class="tag-h2"><a href='/usage/listener'>Listener</a></li> -->
-           <li class="tag-h2"><a href='/usage/radon_cli'>Radon CLI</a></li>
+	<!-- ======================= Sidebar ======================= --> 
+    <div class="nav" id="navbar">
+      <nav class="nav__container">
+        <div>
+         
+          <div class="nav__list">
+          
+            <div class="nav__items">
+              <h3 class="nav__subtitle">Overview</h3>
+              <a href="/" class="nav__link active"><span class="nav__name">Presentation</span></a>
+              <a href='/architecture' class="nav__link"><span class="nav__name">Architecture</span></a>
+            </div> <!-- div nav__items -->
+          
+	        <div class="nav__items">
+			  <h3 class="nav__subtitle">Getting Started</h3>
+	          <a href='/download' class="nav__link"><span class="nav__name">Download</span></a></li>
+	          <a href='/install' class="nav__link"><span class="nav__name">Install</span></a></li>
+	          <a href='/running' class="nav__link"><span class="nav__name">Running</span></a></li>
+	        </div> <!-- div nav__items -->
 
-        </ul>
-
-
+          
+            <div class="nav__items">
+		      <h3 class="nav__subtitle">System Overview</h3>
+              <a href='/components/radon_lib' class="nav__link"><span class="nav__name">Radon Library</span></a></li>
+              <a href='/components/radon_web' class="nav__link"><span class="nav__name">Radon Web</span></a></li>
+              <a href='/components/radon_cli' class="nav__link"><span class="nav__name">Radon CLI</span></a></li>
+              <a href='/components/radon_listener' class="nav__link"><span class="nav__name">Radon Listener</span></a></li>
+              <a href='/components/radon_search' class="nav__link"><span class="nav__name">Radon Search</span></a></li>
+            </div> <!-- div nav__items -->
+          
+            <di class="nav__items">
+		      <h3 class="nav__subtitle">Usage</h3>
+              <a href='/usage/admin_cli' class="nav__link"><span class="nav__name">Admin CLI</span></a></li>
+              <a href='/usage/admin_rest' class="nav__link"><span class="nav__name">Admin REST API</span></a></li>
+              <a href='/usage/cdmi_rest' class="nav__link"><span class="nav__name">CDMI REST API</span></a></li>
+              <a href='/usage/radon_cli' class="nav__link"><span class="nav__name">Radon CLI</span></a></li>
+              <!-- <a href='/usage/search' class="nav__link"><span class="nav__name">Search</span></a></li> -->
+              <!-- <a href='/usage/listener' class="nav__link"><span class="nav__name">Listener</span></a></li> -->
+            </div> <!-- div nav__items -->
+            
+          </div> <!-- div nav__list -->
+        </div>
+        
       </nav>
+    </div> <!-- nav nav__container -->
 
-      <section>
-        {{ content }}
-      </section>
+	<!-- ======================= Content ======================= --> 
+    <div class="content">
+      {{ content }}
+    </div class="content">
 
-    </div>
   </body>
 </html>

@@ -1,7 +1,7 @@
 title: Radon Documentation
 email: jerome.fuselier@gmail.com
 description: Radon documentation for the different components of the system.
-theme: jekyll-theme-leap-day
 show_downloads: false
+theme: minima
 
-repository_url: www.google.fr
+include: [_pages]
