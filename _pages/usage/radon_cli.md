@@ -14,7 +14,7 @@ permalink: /usage/radon_cli
 
 # Presentation
 
-The [Radon Command Line Interface](https://github.com/radon-provenance/radon-cli)
+The [Radon Command Line Interface](https://github.com/radon-provenance/radon-cli){:target="_blank"}
 is a client project written in Python that can be installed on any machine. 
 It accesses a Radon cluster through its RESTful APIs (CDMI and Admin interface).
 

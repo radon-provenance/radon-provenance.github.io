@@ -21,9 +21,9 @@ docker start dse
 docker start studio
 ```
 
-- Opscenter can be accessed at [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888)
+- Opscenter can be accessed at [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888){:target="_blank"}
 
-- Studio can be accessed at [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091)
+- Studio can be accessed at [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091){:target="_blank"}
 
 # MQTT
 
@@ -39,13 +39,15 @@ docker start mqtt
 docker start radon-web
 ```
 
-- Radon Web can be accessed at [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000)
+- Radon Web can be accessed at [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000){:target="_blank"}
 
 
 # Listener
 
 ```shell
-docker run -it --rm radon-listener-image:latest mvn exec:java -Dexec.mainClass="org.radon.listener.RadonApp"
+docker run -it --rm radon-listener-image:latest \
+           mvn exec:java \
+           -Dexec.mainClass="org.radon.listener.RadonApp"
 ```
 
 

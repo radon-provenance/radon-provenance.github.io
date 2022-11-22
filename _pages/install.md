@@ -32,12 +32,15 @@ Enterprise (DSE)
 It is installed with its docker image
 
 ```shell
-docker run -e DS_LICENSE=accept -p 8888:8888 --name opscenter -d datastax/dse-opscenter:6.8.19
+docker run -e DS_LICENSE=accept \
+           -p 8888:8888 \
+           --name opscenter \
+           -d datastax/dse-opscenter:6.8.19
 ```
 
 With the port forwarding that has been defined at the creation ot the image it
-can be accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888) (
-where radon-1.apps.l is the hostname of the host, the IP address can also be used).
+can be accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888){:target="_blank"} 
+( where radon-1.apps.l is the hostname of the host, the IP address can also be used).
 
 
 ### DSE Server (Cassandra)
@@ -83,18 +86,22 @@ DSE Graph. It is not mandatory but it can be useful to experiment with graphs.
 It is installed with its docker image
 
 ```shell
-docker run -e DS_LICENSE=accept -p 9091:9091 --link dse --name studio -d datastax/dse-studio
+docker run -e DS_LICENSE=accept \
+           -p 9091:9091 \
+           --link dse \
+           --name studio \
+           -d datastax/dse-studio
 ```
 
 
 With the port forwarding that has been defined at the creation ot the image it
-can be accessed on [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091) (
-where radon-1.apps.l is the hostname of the host).
+can be accessed on [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091){:target="_blank"}
+(where radon-1.apps.l is the hostname of the host).
 
 ### Configure cluster
 
 The cluster have to be configured with the opscenter web application. It can be 
-accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888).
+accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888){:target="_blank"}.
 
 - Click on Manage existing cluster
 
@@ -124,7 +131,11 @@ allow_anonymous true
 ### Create the MQTT docker
 
 ```shell
-docker run -it -p 1883:1883 -p 9001:9001 --name mqtt -d eclipse-mosquitto -c /mosquitto-no-auth.conf
+docker run -it -p 1883:1883 \
+           -p 9001:9001 \
+           --name mqtt \
+           -d eclipse-mosquitto \
+           -c /mosquitto-no-auth.conf
 ```
 
 Once started its IP address can be found with the command 
@@ -172,13 +183,19 @@ If they are defined in the Dockerfile they have the priority
 ### Create radon-admin docker image
 
 ```
-docker build -t radon-admin-image --build-arg DSE_HOST --build-arg MQTT_HOST  -f radon-lib/Dockerfile .
+docker build -t radon-admin-image \
+             --build-arg DSE_HOST \
+             --build-arg MQTT_HOST \
+             -f radon-lib/Dockerfile .
 ```
 
 On some machine it may be necessary to use this syntax:
 
 ```shell
-docker build -t radon-admin-image --build-arg DSE_HOST=${DSE_HOST} --build-arg MQTT_HOST=${MQTT_HOST} -f radon-lib/Dockerfile .
+docker build -t radon-admin-image \
+             --build-arg DSE_HOST=${DSE_HOST} \
+             --build-arg MQTT_HOST=${MQTT_HOST} \
+             -f radon-lib/Dockerfile .
 ```
 
 **_Note: The image has to be created from a higher level (./src) than radon-lib to be 
@@ -220,7 +237,10 @@ radon-web image_**
 - Create docker image
 
 ```
-docker build -t radon-web-image --build-arg DSE_HOST --build-arg MQTT_HOST  -f radon-web/Dockerfile .
+docker build -t radon-web-image \
+             --build-arg DSE_HOST \
+             --build-arg MQTT_HOST \
+             -f radon-web/Dockerfile .
 ```
 
 **_Note: The image has to be created from a higher level (./src) than radon-web
@@ -232,10 +252,11 @@ as it requires access to both radon-lib and radon-web packages._**
 ```
 docker run --name radon-web \
            -p 8000:8000 \
-           -d radon-web-image:latest gunicorn project.wsgi:application --bind 0.0.0.0:8000 
+           -d radon-web-image:latest \
+           gunicorn project.wsgi:application --bind 0.0.0.0:8000 
 ```
 
-- Radon web server can be accessed on [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000).
+- Radon web server can be accessed on [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000){:target="_blank"}.
 
 - If needed, we can login to the docker container with the command 
 `docker exec -it radon-web bash`
@@ -266,17 +287,22 @@ Set the hostname for mqtt host in <mqttHost> (This is temporary)
 ### Create Docker image for the listener
 
 ```shell
-docker build -t radon-listener-image --build-arg DSE_HOST --build-arg MQTT_HOST  -f radon-listener/Dockerfile .
+docker build -t radon-listener-image \
+             --build-arg DSE_HOST \
+             --build-arg MQTT_HOST \
+             -f radon-listener/Dockerfile .
 ```
 
   
 ### Run the rule engine
 
 ```shell
-docker run -it --rm radon-listener-image:latest mvn exec:java -Dexec.mainClass="org.radon.listener.RadonApp"
+docker run -it --rm radon-listener-image:latest mvn \
+           exec:java -Dexec.mainClass="org.radon.listener.RadonApp"
 ```
 
-If installed correctly it should display notifications when an action fires a rule in Radon.
+If installed correctly it should display notifications when an action fires a 
+rule in Radon.
 
 
 

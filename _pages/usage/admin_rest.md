@@ -14,12 +14,12 @@ permalink: /usage/admin_rest
 # Presentation
 
 
-The [Radon Web project](https://github.com/radon-provenance/radon-web) is a
-translation layer that provides an accessible and well structured set of access
-methods to the data management system. Access methods comes in the form of
-RESTful services, accessible via the base url of a radon node running radon-web.
-This Admin RESTful API allows the remote management of the system. It is
-available at _**/api/admin**_ from the root URI.
+The [Radon Web project](https://github.com/radon-provenance/radon-web){:target="_blank"}
+is a translation layer that provides an accessible and well structured set of 
+access methods to the data management system. Access methods comes in the form 
+of RESTful services, accessible via the base url of a radon node running 
+radon-web. This Admin RESTful API allows the remote management of the system. 
+It is available at _**/api/admin**_ from the root URI.
 
 
 # Groups

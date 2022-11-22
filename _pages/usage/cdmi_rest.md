@@ -14,20 +14,20 @@ permalink: /usage/cdmi_rest
 # Presentation
 
 
-The [Radon Web project](https://github.com/radon-provenance/radon-web) is a
-translation layer that provides an accessible and well structured set of access
-methods to the data management system. Access methods comes in the form of
-RESTful services, accessible via the base url of a radon node running radon-web.
-The object store is used to store and register digital objects in the cluster. The
-data model is that of a hierarchical object store, _i.e._ objects are chunks of
-data that are stored in selected containers and may have associated metadata in
-the form of name/value pairs. The repository is agnostic to the data and
-metadata it stores, and the interpretation of both is the responsibility of the
-various applications, interpreters and engines that use the store. The object
-store provides a CDMI implementation for HTTP access to digital objects in the
-registry. The CDMI standard is fairly well designed, and the richest of the
-available “standards”. We layer a CDMI interface to provide remote (https) based
-access to the objects and metadata.
+The [Radon Web project](https://github.com/radon-provenance/radon-web){:target="_blank"} 
+is a translation layer that provides an accessible and well structured set of 
+access methods to the data management system. Access methods comes in the form 
+of RESTful services, accessible via the base url of a radon node running 
+radon-web. The object store is used to store and register digital objects in 
+the cluster. The data model is that of a hierarchical object store, _i.e._ 
+objects are chunks of data that are stored in selected containers and may have 
+associated metadata in the form of name/value pairs. The repository is agnostic 
+to the data and metadata it stores, and the interpretation of both is the 
+responsibility of the various applications, interpreters and engines that use 
+the store. The object store provides a CDMI implementation for HTTP access to 
+digital objects in the registry. The CDMI standard is fairly well designed, 
+and the richest of the available “standards”. We layer a CDMI interface to 
+provide remote (https) based access to the objects and metadata.
 
 
 # Cloud Data Management Interface

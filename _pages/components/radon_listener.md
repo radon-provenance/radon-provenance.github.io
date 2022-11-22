@@ -33,12 +33,12 @@ case it can execute the right part of the according rule.
 Because the script that interacts with the Radon System is running as a
 different process (or possibly on a different machine), normal intra-process
 communication will not work, so some form of inter-process or network
-communication is needed. Radon uses [MQTT](http://mqtt.org/) for this
-communication, which is an example of a publish/subscribe model. MQTT has a
-central "broker" that receives all messages and forwards them on to clients who
-have subscribed to a topic or topics. In the case of MQTT, topics are a text
-string in the form of a UNIX-style path or URI, which defines a hierarchy.
-For instance `create/resource/path`.
+communication is needed. Radon uses [MQTT](http://mqtt.org/){:target="_blank"} 
+for this communication, which is an example of a publish/subscribe model. MQTT 
+has a central "broker" that receives all messages and forwards them on to 
+clients who have subscribed to a topic or topics. In the case of MQTT, topics 
+are a text string in the form of a UNIX-style path or URI, which defines a 
+hierarchy. For instance `create/resource/path`.
 
 The format of topics used in the listener is:
 
@@ -63,10 +63,9 @@ the system at a given time.
 ## Rules
 
 Drools rules are defined in the file **src/main/resources/META-INF/rules.drl**, it 
-follows the Drools Rule Language ([DRL](https://docs.jboss.org/drools/release/5.2.0.Final/drools-expert-docs/html/ch05.html))
-The default file shows some example of the syntax for the different rules. It
-mainly displays output in the command line to validate that the communication
-is working between Radon and the rule engine.
+follows the Drools Rule Language ([DRL](https://docs.jboss.org/drools/release/5.2.0.Final/drools-expert-docs/html/ch05.html){:target="_blank"}) The default file shows some example of the syntax for the 
+different rules. It mainly displays output in the command line to validate that 
+the communication is working between Radon and the rule engine.
 
 The right part of the rules are Java code, there's a method that can be used
 to execute command line scripts but this is still a work in progress.
@@ -81,7 +80,9 @@ The rule set will probably need to be mounted from a volume in a future
 version to simplify the use.
 
 ```shell
-docker run -it --rm radon-listener-image:latest mvn exec:java -Dexec.mainClass="org.radon.listener.RadonApp"
+docker run -it --rm radon-listener-image:latest \
+           mvn exec:java \
+           -Dexec.mainClass="org.radon.listener.RadonApp"
 ```
 
 

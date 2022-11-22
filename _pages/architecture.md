@@ -31,7 +31,7 @@ The next sections will present each components more precisely.
 
 # Presentation Layer
 
-## [Radon Web Application](https://github.com/radon-provenance/radon-web)
+## [Radon Web Application](https://github.com/radon-provenance/radon-web){:target="_blank"}
 
 The Web Interface is run as a Docker image on several nodes of the Radon cluster. 
 It is powered by Django/Gunicorn and provides a simple interface to the Data 
@@ -40,7 +40,7 @@ Management System via a Web browser.
 All the CRUD functions are available through the interface and it displays the
 hierarchy of the data objects/collections created in the system.
 
-## [Radon Command Line Interface](https://github.com/radon-provenance/radon-cli)
+## [Radon Command Line Interface](https://github.com/radon-provenance/radon-cli){:target="_blank"}
 
 Radon CLI is an independent Python client and command line tool that can be
 used to dialog with a Radon cluster. It uses Radon RESTful APIs to communicate
@@ -53,24 +53,24 @@ with the system.
 
 Radon provides several RESTful APIs that can be used to dialog with the archive.
 
-#### [CDMI API](https://github.com/radon-provenance/radon-web)
+#### [CDMI API](https://github.com/radon-provenance/radon-web){:target="_blank"}
 
-The [Cloud Data Management Interface](https://www.snia.org/cdmi) defines the
-functional interface that applications will use to create, retrieve, update and
-delete data elements from the cluster. As part of this interface the client is
-able to discover the capabilities that the cloud storage offers and use this
-interface to manage containers and the data that is placed in them. In addition,
-metadata can be set on containers and their contained data elements through this
-interface.
+The [Cloud Data Management Interface](https://www.snia.org/cdmi){:target="_blank"}
+defines the functional interface that applications will use to create, retrieve, 
+update and delete data elements from the cluster. As part of this interface the 
+client is able to discover the capabilities that the cloud storage offers and 
+use this interface to manage containers and the data that is placed in them. In 
+addition, metadata can be set on containers and their contained data elements 
+through this interface.
 
 Radon supports a large part of the 1.1.1 specification.
 
-#### [Admin API](https://github.com/radon-provenance/radon-web)
+#### [Admin API](https://github.com/radon-provenance/radon-web){:target="_blank"}
 
 The Radon Admin RESTful API allows the remote management of the system. It
 provides functions to manage users and groups.
 
-## [Radon Library](https://github.com/radon-provenance/radon-lib)
+## [Radon Library](https://github.com/radon-provenance/radon-lib){:target="_blank"}
 
 The Radon library is the shared library for the Radon Data Management System. 
 It is used by other Radon components to interact with the system, hiding the 
