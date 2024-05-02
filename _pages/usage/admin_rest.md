@@ -190,50 +190,6 @@ _Example 2 (using httpie)_:
 http -a radon get http://radon-2.apps.l:8000/api/admin/groups/test_group
 ```
 
-## **Delete an existing group**
-
-
-_Synopsys_:
-
-  To delete on an existing group, the following request shall be performed:
-
-  ```DELETE <root URI>/api/admin/groups/<GroupName>```
-
-  where:
-  * `<root URI>` is the URL of the web server.
-  * `<GroupName>` is the name of the group.
-
-_Response Status_:
-
-<table class="table_api">
-  <tr> <th>HTTP Status</th>   <th>Description</th>                               </tr>
-  <tr> <td>200 OK</td>        <td>The group is deleted</td>                      </tr>
-  <tr> <td>403 Forbidden</td> <td>The client lacks the proper authorization</td> </tr>
-  <tr> <td>404 Not Found</td> <td>The group doesn't exist</td>                   </tr>
-</table>
-
-
-_Example 1_:
-
-  DELETE to the groups URI to delete a group:
-
-```
-DELETE /api/admin/groups/group2 HTTP/1.1
-Host: 192.168.12.12
-```
-
-  Response:
-
-```
-HTTP/1.1 200 OK
-```
-
-_Example 2 (using httpie)_:
-
-```
-http -a radon delete http://radon-2.apps.l:8000/api/admin/groups/test_group
-```
-
 ## **Modify an existing group**
 
 
@@ -324,6 +280,50 @@ _Example 4 (using httpie)_:
 
 ```
 echo '{ "rm_users": ["radon"] }' | http -a radon put http://radon-2.apps.l:8000/api/admin/groups/test_group
+```
+
+## **Delete an existing group**
+
+
+_Synopsys_:
+
+  To delete on an existing group, the following request shall be performed:
+
+  ```DELETE <root URI>/api/admin/groups/<GroupName>```
+
+  where:
+  * `<root URI>` is the URL of the web server.
+  * `<GroupName>` is the name of the group.
+
+_Response Status_:
+
+<table class="table_api">
+  <tr> <th>HTTP Status</th>   <th>Description</th>                               </tr>
+  <tr> <td>200 OK</td>        <td>The group is deleted</td>                      </tr>
+  <tr> <td>403 Forbidden</td> <td>The client lacks the proper authorization</td> </tr>
+  <tr> <td>404 Not Found</td> <td>The group doesn't exist</td>                   </tr>
+</table>
+
+
+_Example 1_:
+
+  DELETE to the groups URI to delete a group:
+
+```
+DELETE /api/admin/groups/group2 HTTP/1.1
+Host: 192.168.12.12
+```
+
+  Response:
+
+```
+HTTP/1.1 200 OK
+```
+
+_Example 2 (using httpie)_:
+
+```
+http -a radon delete http://radon-2.apps.l:8000/api/admin/groups/test_group
 ```
 
 
@@ -518,53 +518,7 @@ _Example 2 (using httpie)_:
 http -a radon get http://radon-2.apps.l:8000/api/admin/users/testAPI
 ```
 
-## **Delete an existing user**
-
-
-_Synopsys_:
-
-  To delete on an existing user, the following request shall be performed:
-
-  ```DELETE <root URI>/api/admin/users/<UserName>```
-
-  where:
-  * `<root URI>` is the URL of the web server.
-  * `<UserName>` is the name of the user.
-
-_Response Status_:
-
-<table class="table_api">
-  <tr> <th>HTTP Status</th>   <th>Description</th>                               </tr>
-  <tr> <td>200 OK</td>        <td>The user is deleted</td>               </tr>
-  <tr> <td>403 Forbidden</td> <td>The client lacks the proper authorization</td> </tr>
-  <tr> <td>404 Not Found</td> <td>The user doesn't exist</td>                    </tr>
-</table>
-
-
-_Example 1_:
-
-  DELETE to the users URI to delete a user:
-
-```
-DELETE /api/admin/user/user1 HTTP/1.1
-Host: 192.168.12.12
-```
-
-  Response:
-
-```
-HTTP/1.1 200 OK
-```
-
-_Example 2 (using httpie)_:
-
-```
-http -a radon delete http://radon-2.apps.l:8000/api/admin/users/testAPI
-```
-
-
 ## **Modify an existing user**
-
 
 _Synopsys_:
 
@@ -587,7 +541,7 @@ modified.
   "password": password,
   "email": email,
   "administrator": is_admin,
-  "active": is_active}
+  "active": is_active
 }
 ````
 
@@ -641,3 +595,49 @@ _Example 2 (using httpie)_:
 ```
 echo '{ "email": "new_test@radon.com" }' | http -a radon put http://radon-2.apps.l:8000/api/admin/users/testAPI
 ```
+
+## **Delete an existing user**
+
+
+_Synopsys_:
+
+  To delete on an existing user, the following request shall be performed:
+
+  ```DELETE <root URI>/api/admin/users/<UserName>```
+
+  where:
+  * `<root URI>` is the URL of the web server.
+  * `<UserName>` is the name of the user.
+
+_Response Status_:
+
+<table class="table_api">
+  <tr> <th>HTTP Status</th>   <th>Description</th>                               </tr>
+  <tr> <td>200 OK</td>        <td>The user is deleted</td>               </tr>
+  <tr> <td>403 Forbidden</td> <td>The client lacks the proper authorization</td> </tr>
+  <tr> <td>404 Not Found</td> <td>The user doesn't exist</td>                    </tr>
+</table>
+
+
+_Example 1_:
+
+  DELETE to the users URI to delete a user:
+
+```
+DELETE /api/admin/user/user1 HTTP/1.1
+Host: 192.168.12.12
+```
+
+  Response:
+
+```
+HTTP/1.1 200 OK
+```
+
+_Example 2 (using httpie)_:
+
+```
+http -a radon delete http://radon-2.apps.l:8000/api/admin/users/testAPI
+```
+
+

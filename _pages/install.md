@@ -1,4 +1,4 @@
----
+ ---
 layout: default
 title: Install procedure
 description: How to install the different components of the system.
@@ -20,27 +20,14 @@ permalink: /install
 sudo apt install docker.io
 ```
 
+Eventually you may need to add your user to the docker group:
+
+```shell
+sudo adduser $USER docker
+```
 
 ## Install DSE environment
 
-
-### Opscenter
-
-DataStax OpsCenter is a visual management and monitoring solution for DataStax 
-Enterprise (DSE)
-
-It is installed with its docker image
-
-```shell
-docker run -e DS_LICENSE=accept \
-           -p 8888:8888 \
-           --name opscenter \
-           -d datastax/dse-opscenter:6.8.19
-```
-
-With the port forwarding that has been defined at the creation ot the image it
-can be accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888){:target="_blank"} 
-( where radon-1.apps.l is the hostname of the host, the IP address can also be used).
 
 
 ### DSE Server (Cassandra)
@@ -63,12 +50,13 @@ enable persistence
 ```shell
 docker run -e DS_LICENSE=accept \
            -e JVM_EXTRA_OPTS="-Xms512m -Xmx2560m" \
-           --link opscenter:opscenter \
+           -p 9042:9042 \
            --name dse -d \
            -v dse_lib:/var/lib/cassandra \
            -v dse_log:/var/log/cassandra \
-           datastax/dse-server:6.8.25 -k -s -g
+           datastax/dse-server:6.8.47 -k -s -g
 ```
+
 
 **_Note 1: On certain configuration (LXC on ProxMox), the size of the heap for the
 JVM has to be set manually. Otherwise we can experience memory issues and a 
@@ -98,24 +86,18 @@ With the port forwarding that has been defined at the creation ot the image it
 can be accessed on [http://radon-1.apps.l:9091](http://radon-1.apps.l:9091){:target="_blank"}
 (where radon-1.apps.l is the hostname of the host).
 
-### Configure cluster
-
-The cluster have to be configured with the opscenter web application. It can be 
-accessed on [http://radon-1.apps.l:8888](http://radon-1.apps.l:8888){:target="_blank"}.
-
-- Click on Manage existing cluster
-
-- Enter the dse container IP address in the host name field. The IP can be found
-with the command `docker exec dse hostname -i`. It should probably be 172.17.0.3.
-
-- Click on Install agents manually. The agent is already installed on the DSE 
-image, so no installation is required.
-
 
 ## Install MQTT
 
 Eclipse Mosquitto is an open source message broker that implements the MQTT 
 protocol. It can be installed with a Docker image.
+
+### Create Volume for persistence
+
+```shell
+docker volume create mosquitto_data
+docker volume create mosquitto_log
+```
 
 ### Create Config file
 
@@ -123,9 +105,12 @@ Mosquitto 2.0 restrict connections to the loopback, we need to allow
 connections via a configuration file.
 
 ```shell
-$ cat mosquitto-no-auth.conf
+$ nano mosquitto.conf
 listener 1883
 allow_anonymous true
+persistence true
+persistence_location /mosquitto/data/
+log_dest file /mosquitto/log/mosquitto.log
 ```
 
 ### Create the MQTT docker
@@ -134,16 +119,19 @@ allow_anonymous true
 docker run -it -p 1883:1883 \
            -p 9001:9001 \
            --name mqtt \
-           -d eclipse-mosquitto \
-           -c /mosquitto-no-auth.conf
+           -v mosquitto_data:/mosquitto/data \
+           -v mosquitto_log:/mosquitto/log \
+           -v $PWD/mosquitto.conf:/mosquitto/config/mosquitto.conf \
+           -d eclipse-mosquitto 
 ```
+
 
 Once started its IP address can be found with the command 
 ```shell
 docker exec mqtt hostname -i
 ````
 
-It should probably be 172.17.0.5.
+It should probably be 172.17.0.4.
 
 
 ## Install radon-web
@@ -182,15 +170,6 @@ If they are defined in the Dockerfile they have the priority
 
 ### Create radon-admin docker image
 
-```
-docker build -t radon-admin-image \
-             --build-arg DSE_HOST \
-             --build-arg MQTT_HOST \
-             -f radon-lib/Dockerfile .
-```
-
-On some machine it may be necessary to use this syntax:
-
 ```shell
 docker build -t radon-admin-image \
              --build-arg DSE_HOST=${DSE_HOST} \
@@ -217,19 +196,9 @@ docker run -it --rm radon-admin-image:latest /bin/bash
 -> radmin init
 ```
 
-**_Note 1: Other things can be created at this time like other users, groups, 
-... But these are the mandatory options that has to be created before the 
-radon-web server can be created._**
-
-- Create other users (optional)
-
-```
--> radmin mkuser
-```
-
-**_Note 2: The radon-admin image is deleted when we exit its shell but it can be
-recreated at any moment if needed. The radmin commands are also installed in the
-radon-web image_**
+**_Note 1: Other things can be created later like other users, groups, 
+... But this creates the mandatory things that has to exist before the 
+radon-web server can be launched._**
 
 
 ### Install radon-web server
@@ -238,8 +207,8 @@ radon-web image_**
 
 ```
 docker build -t radon-web-image \
-             --build-arg DSE_HOST \
-             --build-arg MQTT_HOST \
+             --build-arg DSE_HOST=${DSE_HOST} \
+             --build-arg MQTT_HOST=${MQTT_HOST} \
              -f radon-web/Dockerfile .
 ```
 
@@ -253,13 +222,19 @@ as it requires access to both radon-lib and radon-web packages._**
 docker run --name radon-web \
            -p 8000:8000 \
            -d radon-web-image:latest \
-           gunicorn project.wsgi:application --bind 0.0.0.0:8000 
+           gunicorn project.wsgi:application --bind 0.0.0.0:8000 \
+           --workers 10 --threads 10 --worker-tmp-dir /dev/shm
 ```
 
 - Radon web server can be accessed on [http://radon-1.apps.l:8000](http://radon-1.apps.l:8000){:target="_blank"}.
 
 - If needed, we can login to the docker container with the command 
 `docker exec -it radon-web bash`
+
+- Radon web server serves the microservices needed for the rules. It has to be started
+before we can create anything on the server (users/collections/...).
+
+
 
 
 ## Install radon-listener
@@ -268,6 +243,7 @@ docker run --name radon-web \
 
 ```shell
 git clone https://github.com/radon-provenance/radon-listener.git
+cd radon-listener
 ```
 
 ### Configure hostnames
@@ -275,34 +251,56 @@ git clone https://github.com/radon-provenance/radon-listener.git
 - Configure variables for the different hosts
 
 ```shell
-export DSE_HOST="`docker exec dse hostname -i`"
+export RADON_HOST="`docker exec radon-web hostname -i`"
 export MQTT_HOST="`docker exec mqtt hostname -i`"
 ```
 
-- Configure ./pom.xml
-
-Set the hostname for mqtt host in <mqttHost> (This is temporary)
-  
 
 ### Create Docker image for the listener
 
 ```shell
-docker build -t radon-listener-image \
-             --build-arg DSE_HOST \
-             --build-arg MQTT_HOST \
-             -f radon-listener/Dockerfile .
+docker build -t radon-listener-image .
 ```
 
   
 ### Run the rule engine
 
 ```shell
-docker run -it --rm radon-listener-image:latest mvn \
-           exec:java -Dexec.mainClass="org.radon.listener.RadonApp"
+docker run --name radon-listener \
+           -d radon-listener-image:latest \
+           -m $MQTT_HOST -r $RADON_HOST
 ```
 
-If installed correctly it should display notifications when an action fires a 
-rule in Radon.
+
+## Finalise the installation
+
+
+- Launch a radon-admin container, it can be used locally to setup Radon.
+
+
+```
+docker run -it --rm radon-admin-image:latest /bin/bash
+```
+
+- Create default users (optional)
+
+```
+radmin populate
+```
+
+
+- Create other users (optional)
+
+```
+-> radmin mkuser
+```
+
+
+**_Note: The radon-admin image is deleted when we exit its shell but it can be
+recreated at any moment if needed. The radmin commands are also installed in the
+radon-web image_**
+
+
 
 
 
