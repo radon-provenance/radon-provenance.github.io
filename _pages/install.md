@@ -1,4 +1,4 @@
- ---
+---
 layout: default
 title: Install procedure
 description: How to install the different components of the system.
@@ -7,6 +7,7 @@ permalink: /install
 
 {:.title}
 {{ page.title }}
+
 
 * auto-gen TOC:
 {:toc}
@@ -299,9 +300,3 @@ radmin populate
 **_Note: The radon-admin image is deleted when we exit its shell but it can be
 recreated at any moment if needed. The radmin commands are also installed in the
 radon-web image_**
-
-
-
-
-
-
