@@ -1,0 +1,41 @@
+acl: 
+  tip: ACL
+  txt: Access-Control List (ACL) is a list of permissions associated with a 
+   Radon object (collection or resource). It specifies what operations are 
+   allowed on the object for a specific group of users.
+
+api:
+  tip: API
+  txt: An application programming interface (API) is a way for two or more 
+    computer programs or components to communicate with each other.
+ 
+cdmi:
+  tip: CDMI
+  txt: The Cloud Data Management Interface (CDMI) is a SNIA standard that 
+   specifies a protocol for self-provisioning, administering and accessing 
+   cloud storage.
+
+cli:
+  tip: CLI
+  txt: Command Line Interface
+
+cql:
+  tip: CQL
+  txt: Cassandra Query Language (CQL) is a simple interface for accessing 
+   Cassandra database.
+
+crud: 
+  tip: CRUD
+  txt: Create, Read, Update or Delete operation.
+
+dse:
+  tip: DSE
+  txt: DataStax Enterprise is an on-premises database built on Apache Cassandra,
+
+solr:
+  tip: Solr
+  txt: Apache Solr is  an open-source enterprise-search platform with full-text 
+   search.
+
+   
+## Example in code: {% include tooltip.html name="acl" %}

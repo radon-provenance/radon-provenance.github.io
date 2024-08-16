@@ -1,15 +1,12 @@
 ---
+title: Radon Data Management System
+permalink: /usage/admin_cli.html
 layout: default
-title: Admin Command Line Interface
-description: Command Line Interface for the admin application.
-permalink: /usage/admin_cli
+sidebar_menu: Usage
+sidebar_sub: Admin Command Line Interface
 ---
 
-{:.title}
-{{ page.title }}
-
-* auto-gen TOC:
-{:toc}
+{% include toc.html %}
 
 # Presentation
 
@@ -185,6 +182,3 @@ $ radmin pwd
 ```
 $ radmin rm <path>
 ```
-
-
-

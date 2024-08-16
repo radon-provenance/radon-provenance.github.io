@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.html">
+        <i class="bi bi-house-fill text-white"></i>&nbsp;Radon documentation</a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav">
+        
+        <li id="tg-nav" class="nav-item">
+          <a class="nav-link" id="tg-nav-link" href="#tg-sb-sidebar" role="button" data-bs-toggle="collapse" >
+            <i id="tg-nav-icon" class="bi bi-toggle-on"></i>&nbsp;Nav
+          </a>
+        </li>
+          
+        {% for entry in site.data.topnav %}
+        
+          {% if entry.type == 'link' %}
+            {% if entry.external_url %}
+              <li class="nav-item">
+                <a class="nav-link active" href="{{entry.external_url}}" target="_blank" rel="noopener">{{ entry.title }}</a>
+              </li>
+            {% else %}
+              <li class="nav-link {% if page.url == entry.url %} active{% endif %}">
+                <a class="nav-link" href="{{ entry.url | remove: "/" }}">{{ entry.title }}</a>
+              </li>
+            {% endif %}
+            
+          {% elsif entry.type == 'dropdown' %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" href="#">
+                {{ entry.title }}
+              </a>
+              <ul class="dropdown-menu">
+              
+                {% for item in entry.items %}
+              
+                  {% if item.external_url %}
+                    <li>
+                      <a class="dropdown-item" href="{{item.external_url}}" target="_blank" rel="noopener">{{item.title}}</a>
+                    </li>
+                  {% else %}
+                    <li{% if page.url == item.url %} class="active"{% endif %}>
+                      <a class="dropdown-item" href="{{ item.url| remove: "/" }}">{{item.title}}</a>
+                    </li>
+                  {% endif %}
+                
+                {% endfor %}
+                
+                </ul>
+              </li>
+            
+            {% endif %}
+            
+          {% endfor %}
+        </ul>
+      </div>
+    
+  </div>
+</nav>
+

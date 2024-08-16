@@ -1,75 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
-    <title>{{ page.title | default: site.title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title }}</title>
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('tg-nav').onclick = function(){
+                document.getElementById('tg-nav-icon').classList.toggle('bi-toggle-off');
+                document.getElementById('tg-nav-icon').classList.toggle('bi-toggle-on');
+            }
+        });
+    </script>
+
   </head>
   <body>
-	
-    <!-- ======================= HEADER ======================= --> 
-    <header class="header">
-      <div class="header__container">
-        <h1>{{ page.title | default: site.title }}</h1>
-        <p>{{ page.description | default: site.description | default: site.github.project_tagline }}</p>
-      </div>
-      <div id="banner">
-        <a href="https://github.com/radon-provenance" class="button"><strong>View On GitHub</strong></a>
-      </div>
-    </header>    
-      
-	<!-- ======================= Sidebar ======================= --> 
-    <div class="nav" id="navbar">
-      <nav class="nav__container">
-        <div>
-         
-          <div class="nav__list">
-          
-            <div class="nav__items">
-              <h3 class="nav__subtitle">Overview</h3>
-              <a href="/" class="nav__link active"><span class="nav__name">Presentation</span></a>
-              <a href='/architecture' class="nav__link"><span class="nav__name">Architecture</span></a>
-            </div> <!-- div nav__items -->
-          
-	        <div class="nav__items">
-			  <h3 class="nav__subtitle">Getting Started</h3>
-	          <a href='/download' class="nav__link"><span class="nav__name">Download</span></a></li>
-	          <a href='/install' class="nav__link"><span class="nav__name">Install</span></a></li>
-	          <a href='/running' class="nav__link"><span class="nav__name">Running</span></a></li>
-	        </div> <!-- div nav__items -->
+   <!--{% include header.html %} -->
+    {% include topnav.html %}
 
-          
-            <div class="nav__items">
-		      <h3 class="nav__subtitle">System Overview</h3>
-              <a href='/components/radon_lib' class="nav__link"><span class="nav__name">Radon Library</span></a></li>
-              <a href='/components/radon_web' class="nav__link"><span class="nav__name">Radon Web</span></a></li>
-              <a href='/components/radon_cli' class="nav__link"><span class="nav__name">Radon CLI</span></a></li>
-              <a href='/components/radon_listener' class="nav__link"><span class="nav__name">Radon Listener</span></a></li>
-              <a href='/components/radon_search' class="nav__link"><span class="nav__name">Radon Search</span></a></li>
-            </div> <!-- div nav__items -->
-          
-            <di class="nav__items">
-		      <h3 class="nav__subtitle">Usage</h3>
-              <a href='/usage/admin_cli' class="nav__link"><span class="nav__name">Admin CLI</span></a></li>
-              <a href='/usage/admin_rest' class="nav__link"><span class="nav__name">Admin REST API</span></a></li>
-              <a href='/usage/cdmi_rest' class="nav__link"><span class="nav__name">CDMI REST API</span></a></li>
-              <a href='/usage/radon_cli' class="nav__link"><span class="nav__name">Radon CLI</span></a></li>
-              <!-- <a href='/usage/search' class="nav__link"><span class="nav__name">Search</span></a></li> -->
-              <!-- <a href='/usage/listener' class="nav__link"><span class="nav__name">Listener</span></a></li> -->
-            </div> <!-- div nav__items -->
-            
-          </div> <!-- div nav__list -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3 collapse show" id="tg-sb-sidebar">
+          {% include sidebar.html %}
         </div>
-        
-      </nav>
-    </div> <!-- nav nav__container -->
-
-	<!-- ======================= Content ======================= --> 
-    <div class="content">
-      {{ content }}
-    </div class="content">
-
+        <div class="col-md-9 content" id="tg-sb-content">
+          {{content}}
+        </div>
+      </div>
+    </div>
+    
   </body>
 </html>

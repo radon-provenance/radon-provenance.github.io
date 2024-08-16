@@ -1,0 +1,6 @@
+<map name="svgimagemap"><area alt="path33836" coords="0,0,101,1,101,27,72,27,63,34,62,42,1,42,0,0" shape="poly" title="path33836">
+<area alt="path33955" coords="1,46,1,86,100,86,100,61,73,61,63,53,62,45" shape="poly" title="path33955">
+<area alt="path33957" coords="204,46,204,87,105,87,105,61,135,60,142,52,143,45" shape="poly" title="path33957">
+<area alt="path34872" coords="105,1,203,1,204,43,143,42,140,31,132,27,104,27" shape="poly" title="path34872">
+</map>
+<img src="replace_here" usemap="#svgimagemap"/>

@@ -1,0 +1,27 @@
+<div class="flex-shrink-0 p-3 bg-white collapse show">
+  <a href="/" class="d-flex align-items-center pb-3 mb-3 text-decoration-none border-bottom sb-title">
+    <i class="bi bi-file-text"></i>&nbsp;<span>Documentation</span>
+  </a>
+  <ul class="list-unstyled ps-0">
+    {% for entry in site.data.sidebar %}
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#{{ entry.title }}-collapse" 
+                aria-expanded="{% if entry.title == page.sidebar_menu %}true{% else %}false{%endif %}">
+          {{ entry.title }}
+        </button>
+        <div id="{{ entry.title }}-collapse"
+            {% if entry.title != page.sidebar_menu %}class="collapse"{%endif %}>
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            {% for item in entry.items %}
+              <li><a href="{{ item.url }}" 
+                     class="rounded{% if item.title == page.sidebar_sub %} active{%endif %}">{{ item.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </li>
+      
+    {% endfor %}
+  </ul>
+  </div>

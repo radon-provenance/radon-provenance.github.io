@@ -1,0 +1,47 @@
+- title: Overview
+  items:
+    - title: Presentation
+      url: /index.html
+    - title: Get started
+      url: /get_started.html
+    - title: Architecture
+      url: /architecture.html
+    - title: Technical Description
+      url: /technical.html
+#    - title: About
+#      url: /about.html
+- title: Installation
+  items:
+    - title: Download
+      url: /install/download.html
+#    - title: Library used
+#      url: /install/library.html
+    - title: Install manually
+      url: /install/install.html
+- title: Running
+  items:
+    - title: DSE
+      url: /running/dse.html
+    - title: MQTT
+      url: /running/mqtt.html
+    - title: Radon Web
+      url: /running/web.html
+    - title: Radon Listener
+      url: /running/listener.html
+- title: Usage
+  items:
+    - title: CDMI REST api
+      url: /usage/cdmi.html
+    - title: Admin REST api
+      url: /usage/admin.html
+    - title: Admin Command Line Interface
+      url: /usage/admin_cli.html
+    - title: Client Command Line Interface
+      url: /usage/cli.html
+#    - title: Search
+#      url: /usage/search.html
+#- title: Tutorial
+#  items:
+#    - title: Overview
+#      url: /tutorial/overview.html
+    

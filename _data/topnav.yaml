@@ -1,0 +1,15 @@
+- type: link
+  title: GitHub
+  external_url: https://github.com/radon-provenance
+
+- type: dropdown
+  title: Radon components
+  items:
+    - title: Radon-lib
+      external_url: https://github.com/radon-provenance/radon-lib
+    - title: Radon-web
+      external_url: https://github.com/radon-provenance/radon-web
+    - title: Radon-listener
+      external_url: https://github.com/radon-provenance/radon-listener
+    - title: Radon-cli
+      external_url: https://github.com/radon-provenance/radon-cli

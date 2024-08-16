@@ -1,7 +1,8 @@
-title: Radon Documentation
-email: jerome.fuselier@gmail.com
-description: Radon documentation for the different components of the system.
-show_downloads: false
-theme: minima
+
+
+site_title: Radon Documentation
+
+# Main name on the top navigation bar
+topnav_title: Radon Documentation
 
 include: [_pages]
