@@ -48,12 +48,6 @@ have complex scheduling frameworks.
 </div>
 
 
-
-
-
-
-
-
 ## Storage
 
 Radon supports data sharing, or interoperability between external data stores.

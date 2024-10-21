@@ -40,8 +40,16 @@
       url: /usage/cli.html
 #    - title: Search
 #      url: /usage/search.html
-#- title: Tutorial
-#  items:
-#    - title: Overview
-#      url: /tutorial/overview.html
+- title: Tutorial
+  items:
+    - title: Overview
+      url: /tutorial/overview.html
+    - title: Radon Library
+      url: /tutorial/radon_lib.html
+    - title: CDMI Rest API
+      url: /tutorial/cdmi.html
+    - title: Working with Graph
+      url: /tutorial/graph.html
+    - title: Working with rules
+      url: /tutorial/rules.html
     
